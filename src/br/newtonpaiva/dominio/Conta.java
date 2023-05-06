@@ -1,9 +1,21 @@
 package br.newtonpaiva.dominio;
 
+import java.lang.Double;
+
 public class Conta {
     private String agencia;
     private String numero;
     private Double saldo;
+
+    public Conta() {
+        this(null,null,null);
+    }
+
+    public Conta(String agencia, String numero, Double saldo) {
+        this.agencia = agencia;
+        this.numero = numero;
+        this.saldo = saldo;
+    }
 
     public String getAgencia() {
         return agencia;

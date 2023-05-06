@@ -7,18 +7,27 @@ public class Banco {
     private String nome;
     private List<Conta> contas = new ArrayList<>();
 
+    public Double somarSaldos(){
+        Double soma = 0.0;
+        for (Conta temp : contas){
+            soma += temp.getSaldo();
+        }
+        return soma;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    private void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void addConta(Conta conta){
-        contas.add(conta);
+    public void addConta(Conta conta) {
+        this.contas.add(conta);
     }
-    public List<Conta> getContas(){
+
+    public List<Conta> getContas() {
         return contas;
     }
 }
