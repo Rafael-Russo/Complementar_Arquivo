@@ -7,19 +7,46 @@ import br.newtonpaiva.dominio.ManipuladorArquivos;
 
 import javax.swing.*;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class SistemaBancario {
     public static void main(String[] args) throws IOException {
+        String bancoFile = "";
+        String contasFile = "";
+        try {
+            File myObj = new File("Banco.txt");
+            bancoFile = myObj.getAbsolutePath();
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        try {
+            File myObj = new File("Contas.txt");
+            contasFile = myObj.getAbsolutePath();
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
         Cliente c1 = new Cliente();
 
         Banco banco = new Banco();
 
         c1.setNome(JOptionPane.showInputDialog("Digite o nome do cliente: "));
-
-        String file = "../Complementar_Arquivos/Contas.txt";
-        String[] contas = ManipuladorArquivos.leitor(file);
+        String[] contas = ManipuladorArquivos.leitor(contasFile);
 
         Conta[] objContas = new Conta[contas.length-1];
 
@@ -33,8 +60,7 @@ public class SistemaBancario {
 
         banco.setNome(JOptionPane.showInputDialog("Digite o nome do Banco: "));
 
-        file = "../Complementar_Arquivos/Banco.txt";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(bancoFile));
         writer.write("Banco " + banco.getNome() + " possui o saldo geral de contas de: " + banco.somarSaldos() + ".");
         writer.close();
     }
